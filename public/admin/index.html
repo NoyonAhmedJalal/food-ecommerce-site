@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Panel | Foodies</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/image/logo.png">
+</head>
+<body>
+    <!-- Sign in -->
+    <main class="login-view" id="login-view" hidden>
+        <section class="login-brand">
+            <a href="/" class="login-logo" aria-label="Foodies home">
+                <img src="/image/logo.png" alt="Foodies logo">
+                <span>Foodies</span>
+            </a>
+            <div class="login-copy">
+                <span class="pill">Restaurant admin</span>
+                <h1>Run the kitchen from one screen.</h1>
+                <p>Manage the menu, watch new orders arrive and move every delivery through the kitchen — all in real time.</p>
+                <ul class="login-points">
+                    <li><i class='bx bx-check-circle' aria-hidden="true"></i> Live order queue with status updates</li>
+                    <li><i class='bx bx-check-circle' aria-hidden="true"></i> Menu and pricing management</li>
+                    <li><i class='bx bx-check-circle' aria-hidden="true"></i> Daily revenue and order insights</li>
+                </ul>
+            </div>
+            <p class="login-foot">Foodies · Online food ordering</p>
+        </section>
+
+        <section class="login-panel">
+            <form class="login-card" id="login-form" autocomplete="on">
+                <h2>Staff sign in</h2>
+                <p>Use your admin credentials to continue.</p>
+
+                <label class="field">
+                    <span>Email address</span>
+                    <input id="login-email" name="email" type="email" placeholder="admin@foodies.com" required autocomplete="username">
+                </label>
+
+                <label class="field">
+                    <span>Password</span>
+                    <div class="password-wrap">
+                        <input id="login-password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+                        <button type="button" class="peek" id="toggle-password" aria-label="Show password">
+                            <i class='bx bx-show' aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </label>
+
+                <p class="form-error" id="login-error" role="alert"></p>
+
+                <button class="btn-primary" type="submit" id="login-btn">Sign in</button>
+
+                <a class="back-link" href="/"><i class='bx bx-left-arrow-alt' aria-hidden="true"></i> Back to the store</a>
+            </form>
+        </section>
+    </main>
+
+    <!-- Admin app -->
+    <div class="admin" id="app-view" hidden>
+        <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+        <aside class="sidebar" id="sidebar">
+            <a href="/" class="brand">
+                <img src="/image/logo.png" alt="">
+                <span>Foodies<small>Admin panel</small></span>
+            </a>
+
+            <nav class="side-nav" aria-label="Admin sections">
+                <button type="button" class="side-link is-active" data-view="dashboard">
+                    <i class='bx bxs-dashboard' aria-hidden="true"></i> Dashboard
+                </button>
+                <button type="button" class="side-link" data-view="orders">
+                    <i class='bx bxs-receipt' aria-hidden="true"></i> Orders
+                    <span class="side-badge" id="active-order-badge" hidden>0</span>
+                </button>
+                <button type="button" class="side-link" data-view="menu">
+                    <i class='bx bxs-food-menu' aria-hidden="true"></i> Menu
+                </button>
+            </nav>
+
+            <div class="side-foot">
+                <div class="side-user">
+                    <span class="avatar" aria-hidden="true">A</span>
+                    <div>
+                        <strong id="admin-name">Admin</strong>
+                        <small id="admin-email">admin@foodies.com</small>
+                    </div>
+                </div>
+                <button type="button" class="side-link side-logout" id="logout-btn">
+                    <i class='bx bx-log-out' aria-hidden="true"></i> Sign out
+                </button>
+                <a class="side-link" href="/">
+                    <i class='bx bx-store' aria-hidden="true"></i> View store
+                </a>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="topbar">
+                <button type="button" class="hamburger" id="sidebar-toggle" aria-label="Open navigation" aria-expanded="false">
+                    <i class='bx bx-menu' aria-hidden="true"></i>
+                </button>
+                <div class="topbar-title">
+                    <h1 id="page-title">Dashboard</h1>
+                    <p id="page-subtitle">A snapshot of today's restaurant activity.</p>
+                </div>
+                <button type="button" class="icon-button" id="refresh-btn" title="Refresh data" aria-label="Refresh data">
+                    <i class='bx bx-refresh' aria-hidden="true"></i>
+                </button>
+            </header>
+
+            <main class="content">
+                <!-- Dashboard -->
+                <section class="view" id="view-dashboard">
+                    <div class="stats-grid" id="stats-grid">
+                        <article class="stat-card">
+                            <span class="stat-icon pink"><i class='bx bxs-shopping-bag' aria-hidden="true"></i></span>
+                            <div>
+                                <p>Total orders</p>
+                                <h2 id="stat-total-orders">—</h2>
+                                <small id="stat-today-orders">—</small>
+                            </div>
+                        </article>
+                        <article class="stat-card">
+                            <span class="stat-icon amber"><i class='bx bxs-time-five' aria-hidden="true"></i></span>
+                            <div>
+                                <p>Active orders</p>
+                                <h2 id="stat-active-orders">—</h2>
+                                <small>In the kitchen or on the road</small>
+                            </div>
+                        </article>
+                        <article class="stat-card">
+                            <span class="stat-icon green"><i class='bx bxs-wallet' aria-hidden="true"></i></span>
+                            <div>
+                                <p>Revenue</p>
+                                <h2 id="stat-revenue">—</h2>
+                                <small id="stat-delivered-revenue">—</small>
+                            </div>
+                        </article>
+                        <article class="stat-card">
+                            <span class="stat-icon blue"><i class='bx bxs-group' aria-hidden="true"></i></span>
+                            <div>
+                                <p>Customers</p>
+                                <h2 id="stat-customers">—</h2>
+                                <small id="stat-menu-items">—</small>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <section class="panel">
+                            <header class="panel-head">
+                                <h2>Recent orders</h2>
+                                <button type="button" class="text-button" data-goto="orders">View all</button>
+                            </header>
+                            <div class="table-wrap">
+                                <table class="data-table compact">
+                                    <thead>
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Customer</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recent-orders-body">
+                                        <tr><td colspan="4" class="empty-cell">Loading…</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section class="panel">
+                            <header class="panel-head">
+                                <h2>Order status</h2>
+                            </header>
+                            <div class="status-breakdown" id="status-breakdown"></div>
+                        </section>
+                    </div>
+                </section>
+
+                <!-- Orders -->
+                <section class="view" id="view-orders" hidden>
+                    <div class="toolbar">
+                        <label class="search-box">
+                            <i class='bx bx-search' aria-hidden="true"></i>
+                            <input type="search" id="order-search" placeholder="Search order, customer or phone…" aria-label="Search orders">
+                        </label>
+
+                        <select id="order-status-filter" class="select" aria-label="Filter by status">
+                            <option value="all">All statuses</option>
+                            <option value="placed">Placed</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="preparing">Preparing</option>
+                            <option value="out_for_delivery">Out for delivery</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+
+                        <button type="button" class="btn-secondary" id="orders-refresh">
+                            <i class='bx bx-refresh' aria-hidden="true"></i> Refresh
+                        </button>
+                    </div>
+
+                    <section class="panel">
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Customer</th>
+                                        <th>Items</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Placed</th>
+                                        <th class="actions-col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orders-body">
+                                    <tr><td colspan="7" class="empty-cell">Loading…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="table-foot">
+                            <span id="orders-count">—</span>
+                            <div class="pager">
+                                <button type="button" class="icon-button" id="orders-prev" aria-label="Previous page"><i class='bx bx-chevron-left' aria-hidden="true"></i></button>
+                                <span id="orders-page">Page 1</span>
+                                <button type="button" class="icon-button" id="orders-next" aria-label="Next page"><i class='bx bx-chevron-right' aria-hidden="true"></i></button>
+                            </div>
+                        </footer>
+                    </section>
+                </section>
+
+                <!-- Menu -->
+                <section class="view" id="view-menu" hidden>
+                    <div class="toolbar">
+                        <label class="search-box">
+                            <i class='bx bx-search' aria-hidden="true"></i>
+                            <input type="search" id="menu-filter" placeholder="Filter menu items…" aria-label="Filter menu items">
+                        </label>
+
+                        <button type="button" class="btn-primary" id="add-menu-item">
+                            <i class='bx bx-plus' aria-hidden="true"></i> Add menu item
+                        </button>
+                    </div>
+
+                    <section class="panel">
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Rating</th>
+                                        <th>Available</th>
+                                        <th>Offer</th>
+                                        <th class="actions-col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="menu-body">
+                                    <tr><td colspan="7" class="empty-cell">Loading…</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Order detail modal -->
+    <div class="modal" id="order-modal" hidden>
+        <div class="modal-backdrop" data-close-modal></div>
+        <div class="modal-card wide" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+            <header class="modal-head">
+                <div>
+                    <h2 id="order-modal-title">Order</h2>
+                    <p id="order-modal-subtitle"></p>
+                </div>
+                <button type="button" class="icon-button" data-close-modal aria-label="Close">
+                    <i class='bx bx-x' aria-hidden="true"></i>
+                </button>
+            </header>
+            <div class="modal-body" id="order-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Menu editor modal -->
+    <div class="modal" id="menu-modal" hidden>
+        <div class="modal-backdrop" data-close-modal></div>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="menu-modal-title">
+            <header class="modal-head">
+                <div>
+                    <h2 id="menu-modal-title">Add menu item</h2>
+                    <p>Dishes appear on the storefront immediately.</p>
+                </div>
+                <button type="button" class="icon-button" data-close-modal aria-label="Close">
+                    <i class='bx bx-x' aria-hidden="true"></i>
+                </button>
+            </header>
+
+            <form class="modal-body form-grid" id="menu-form">
+                <input type="hidden" id="menu-id" name="id">
+
+                <label class="field span-2">
+                    <span>Name</span>
+                    <input id="menu-name" name="name" type="text" required maxlength="80" placeholder="Chicken Biryani">
+                </label>
+
+                <label class="field">
+                    <span>Category</span>
+                    <input id="menu-category" name="category" type="text" required maxlength="40" placeholder="Rice" list="category-list">
+                    <datalist id="category-list">
+                        <option value="Pizza"></option>
+                        <option value="Burgers"></option>
+                        <option value="Rice"></option>
+                        <option value="Sides"></option>
+                        <option value="Drinks"></option>
+                        <option value="Desserts"></option>
+                        <option value="Combos"></option>
+                    </datalist>
+                </label>
+
+                <label class="field">
+                    <span>Price (USD)</span>
+                    <input id="menu-price" name="price" type="number" min="0" step="0.01" required placeholder="12.99">
+                </label>
+
+                <label class="field">
+                    <span>Old price (optional)</span>
+                    <input id="menu-old-price" name="oldPrice" type="number" min="0" step="0.01" placeholder="16.99">
+                </label>
+
+                <label class="field">
+                    <span>Rating (0–5)</span>
+                    <input id="menu-rating" name="rating" type="number" min="0" max="5" step="0.1" value="4.5">
+                </label>
+
+                <label class="field">
+                    <span>Sort order</span>
+                    <input id="menu-sort" name="sortOrder" type="number" step="1" value="0">
+                </label>
+
+                <label class="field span-2">
+                    <span>Image path or URL</span>
+                    <input id="menu-image" name="image" type="text" maxlength="300" placeholder="image/biryani.webp or https://…">
+                </label>
+
+                <label class="field span-2">
+                    <span>Description</span>
+                    <textarea id="menu-description" name="description" rows="3" required maxlength="240" placeholder="Fragrant basmati rice with tender spiced chicken."></textarea>
+                </label>
+
+                <div class="check-row span-2">
+                    <label class="check"><input id="menu-available" name="available" type="checkbox" checked> Available on the menu</label>
+                    <label class="check"><input id="menu-offer" name="isOffer" type="checkbox"> Show in special offers</label>
+                </div>
+
+                <p class="form-error span-2" id="menu-form-error" role="alert"></p>
+
+                <div class="form-actions span-2">
+                    <button type="button" class="btn-secondary" data-close-modal>Cancel</button>
+                    <button type="submit" class="btn-primary" id="menu-save-btn">Save item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="admin.js" defer></script>
+</body>
+</html>

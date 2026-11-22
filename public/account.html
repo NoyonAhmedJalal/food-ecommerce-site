@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your Foodies account and order history.">
+    <title>My Account | Foodies</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="my.css?v=20261121c">
+    <link rel="stylesheet" href="ordering.css?v=20261121c">
+    <link rel="stylesheet" href="auth.css?v=20261121c">
+    <link rel="icon" type="image/png" sizes="32x32" href="image/logo.png">
+</head>
+<body>
+    <header class="nav" id="site-header">
+        <a class="logo" href="/" aria-label="Foodies home">
+            <img src="image/logo.png" alt="Foodies logo">
+        </a>
+
+        <nav class="menu" id="menu" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/#menu-title">Menu</a>
+            <a href="/#offers">Offers</a>
+            <a href="/track.html">Track Order</a>
+        </nav>
+
+        <div class="nav-icon">
+            <div class="account-menu" id="account-menu">
+                <button class="account-toggle" id="account-toggle" type="button" aria-label="Sign in or create an account" aria-haspopup="true" aria-expanded="false" aria-controls="account-panel">
+                    <i class='bx bxs-user' aria-hidden="true"></i>
+                    <span class="account-dot" aria-hidden="true"></span>
+                </button>
+
+                <div class="account-panel" id="account-panel" hidden>
+                    <div class="account-panel-head" data-auth="customer" hidden>
+                        <span class="account-panel-label">Signed in as</span>
+                        <strong class="account-panel-name" data-customer-name></strong>
+                    </div>
+
+                    <p class="account-panel-guest" data-auth="guest">Sign in for faster checkout, saved details and easy order tracking.</p>
+
+                    <a href="/account.html" data-auth="customer" hidden><i class='bx bx-user-circle' aria-hidden="true"></i> My account</a>
+                    <a href="/track.html" data-auth="customer" hidden><i class='bx bx-package' aria-hidden="true"></i> Track an order</a>
+                    <button class="account-item" type="button" data-signout data-auth="customer" hidden><i class='bx bx-log-out' aria-hidden="true"></i> Sign out</button>
+
+                    <a href="/signin.html" data-auth="guest"><i class='bx bx-log-in' aria-hidden="true"></i> Sign in</a>
+                    <a class="account-cta" href="/signup.html" data-auth="guest"><i class='bx bx-user-plus' aria-hidden="true"></i> Create account</a>
+                </div>
+            </div>
+            <a href="/" class="cart-link" aria-label="Back to the store"><i class='bx bxs-cart'></i></a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+                <i class='bx bx-menu'></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="account-main">
+        <div class="account-wrap" id="account-wrap" hidden>
+            <header class="account-head">
+                <div>
+                    <span class="eyebrow">My account</span>
+                    <h1>Hi, <span id="account-name">friend</span></h1>
+                    <p id="account-email"></p>
+                </div>
+                <button class="btn btn-ghost" type="button" id="signout-btn">
+                    <i class='bx bx-log-out' aria-hidden="true"></i> Sign out
+                </button>
+            </header>
+
+            <div class="account-grid">
+                <section class="account-card" aria-labelledby="profile-title">
+                    <h2 id="profile-title">Delivery details</h2>
+                    <form id="profile-form" autocomplete="on">
+                        <label class="auth-field">
+                            <span>Full name</span>
+                            <input name="name" type="text" required maxlength="80" autocomplete="name">
+                        </label>
+
+                        <label class="auth-field">
+                            <span>Email address</span>
+                            <input name="email" type="email" disabled>
+                        </label>
+
+                        <label class="auth-field">
+                            <span>Phone number</span>
+                            <input name="phone" type="tel" maxlength="30" autocomplete="tel">
+                        </label>
+
+                        <label class="auth-field">
+                            <span>Delivery address</span>
+                            <input name="address" type="text" maxlength="300" autocomplete="street-address">
+                        </label>
+
+                        <p class="form-error" id="profile-error" role="alert"></p>
+
+                        <div class="account-actions">
+                            <button class="btn" type="submit" id="profile-save">Save details</button>
+                            <a class="btn btn-ghost" href="/#menu-title">Order food</a>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="account-card" aria-labelledby="orders-title">
+                    <h2 id="orders-title">Your orders</h2>
+                    <div class="order-list" id="order-list">
+                        <p class="account-empty">Loading your orders…</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="nav.js?v=20261121c" defer></script>
+    <script src="auth-nav.js?v=20261121c" defer></script>
+    <script src="account.js?v=20261121c" defer></script>
+</body>
+</html>

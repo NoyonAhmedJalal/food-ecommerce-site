@@ -1,0 +1,7 @@
+node_modules/
+.env
+.mongo-bin/
+*.log
+server.err
+.screenshots/
+.DS_Store

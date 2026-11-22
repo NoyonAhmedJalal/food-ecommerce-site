@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your Foodies order in real time.">
+    <title>Track Order | Foodies</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="my.css?v=20261121c">
+    <link rel="stylesheet" href="ordering.css?v=20261121c">
+    <link rel="icon" type="image/png" sizes="32x32" href="image/logo.png">
+</head>
+<body>
+    <header class="nav" id="site-header">
+        <a class="logo" href="/" aria-label="Foodies home">
+            <img src="image/logo.png" alt="Foodies logo">
+        </a>
+
+        <nav class="menu" id="menu" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/#menu-title">Menu</a>
+            <a href="/#offers">Offers</a>
+            <a href="/track.html">Track Order</a>
+        </nav>
+
+        <div class="nav-icon">
+            <div class="account-menu" id="account-menu">
+                <button class="account-toggle" id="account-toggle" type="button" aria-label="Sign in or create an account" aria-haspopup="true" aria-expanded="false" aria-controls="account-panel">
+                    <i class='bx bxs-user' aria-hidden="true"></i>
+                    <span class="account-dot" aria-hidden="true"></span>
+                </button>
+
+                <div class="account-panel" id="account-panel" hidden>
+                    <div class="account-panel-head" data-auth="customer" hidden>
+                        <span class="account-panel-label">Signed in as</span>
+                        <strong class="account-panel-name" data-customer-name></strong>
+                    </div>
+
+                    <p class="account-panel-guest" data-auth="guest">Sign in for faster checkout, saved details and easy order tracking.</p>
+
+                    <a href="/account.html" data-auth="customer" hidden><i class='bx bx-user-circle' aria-hidden="true"></i> My account</a>
+                    <a href="/track.html" data-auth="customer" hidden><i class='bx bx-package' aria-hidden="true"></i> Track an order</a>
+                    <button class="account-item" type="button" data-signout data-auth="customer" hidden><i class='bx bx-log-out' aria-hidden="true"></i> Sign out</button>
+
+                    <a href="/signin.html" data-auth="guest"><i class='bx bx-log-in' aria-hidden="true"></i> Sign in</a>
+                    <a class="account-cta" href="/signup.html" data-auth="guest"><i class='bx bx-user-plus' aria-hidden="true"></i> Create account</a>
+                </div>
+            </div>
+            <a href="/#page6" class="cart-link" aria-label="Back to the store"><i class='bx bxs-cart'></i></a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+                <i class='bx bx-menu'></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="track-main">
+        <div class="track-wrap">
+            <div class="track-heading">
+                <span class="eyebrow">Live order tracking</span>
+                <h1>Where is my food?</h1>
+                <p>Enter your order number and the phone number you used at checkout to see the latest status.</p>
+            </div>
+
+            <div class="track-card">
+                <form class="track-form" id="track-form" autocomplete="off">
+                    <div class="track-field">
+                        <label for="order-number">Order number</label>
+                        <input id="order-number" name="orderNumber" type="text" placeholder="FD-XXXXXX" required maxlength="30">
+                    </div>
+                    <div class="track-field">
+                        <label for="phone">Phone number</label>
+                        <input id="phone" name="phone" type="tel" placeholder="Phone used for the order" required maxlength="30">
+                    </div>
+                    <button class="btn" type="submit" id="track-btn">Track order</button>
+                </form>
+
+                <p class="form-error track-error" id="track-error" role="alert"></p>
+
+                <section class="track-result" id="track-result" hidden aria-live="polite"></section>
+            </div>
+
+            <p class="track-note">
+                Your order number was shown when you placed the order and is also saved on this device.
+                Need help? Call <a href="tel:+8801233983234">+880 1233 983 234</a>.
+            </p>
+        </div>
+    </main>
+
+    <footer id="footer">
+        <section id="location">
+            <h2>Location</h2>
+            <p>Bangladesh</p>
+            <p>India</p>
+            <p>Nepal</p>
+        </section>
+
+        <address id="cnt">
+            <h2>Contact</h2>
+            <p>Mobile: <a href="tel:+8801233983234">+880 1233 983 234</a></p>
+            <p>Email: <a href="mailto:fooddies@gmail.com">fooddies@gmail.com</a></p>
+        </address>
+
+        <section id="src">
+            <h2>Our Service</h2>
+            <a href="/">Order Food</a>
+            <a href="/#offers">Special Offers</a>
+            <a href="/signin.html">Customer Sign In</a>
+            <a href="/admin/">Staff Login</a>
+        </section>
+
+        <section id="follow">
+            <h2>Follow Us</h2>
+            <a href="#" aria-label="Facebook"><i class='bx bxl-facebook-circle'></i></a>
+            <a href="#" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+            <a href="#" aria-label="Twitter"><i class='bx bxl-twitter'></i></a>
+            <a href="#" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+        </section>
+    </footer>
+
+    <script src="nav.js?v=20261121c" defer></script>
+    <script src="auth-nav.js?v=20261121c" defer></script>
+    <script src="track.js?v=20261121c" defer></script>
+</body>
+</html>

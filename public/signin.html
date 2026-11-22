@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your Foodies account.">
+    <title>Sign In | Foodies</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="my.css?v=20261121c">
+    <link rel="stylesheet" href="ordering.css?v=20261121c">
+    <link rel="stylesheet" href="auth.css?v=20261121c">
+    <link rel="icon" type="image/png" sizes="32x32" href="image/logo.png">
+</head>
+<body>
+    <header class="nav" id="site-header">
+        <a class="logo" href="/" aria-label="Foodies home">
+            <img src="image/logo.png" alt="Foodies logo">
+        </a>
+
+        <nav class="menu" id="menu" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/#menu-title">Menu</a>
+            <a href="/#offers">Offers</a>
+            <a href="/track.html">Track Order</a>
+        </nav>
+
+        <div class="nav-icon">
+            <div class="account-menu" id="account-menu">
+                <button class="account-toggle" id="account-toggle" type="button" aria-label="Sign in or create an account" aria-haspopup="true" aria-expanded="false" aria-controls="account-panel">
+                    <i class='bx bxs-user' aria-hidden="true"></i>
+                    <span class="account-dot" aria-hidden="true"></span>
+                </button>
+
+                <div class="account-panel" id="account-panel" hidden>
+                    <div class="account-panel-head" data-auth="customer" hidden>
+                        <span class="account-panel-label">Signed in as</span>
+                        <strong class="account-panel-name" data-customer-name></strong>
+                    </div>
+
+                    <p class="account-panel-guest" data-auth="guest">Sign in for faster checkout, saved details and easy order tracking.</p>
+
+                    <a href="/account.html" data-auth="customer" hidden><i class='bx bx-user-circle' aria-hidden="true"></i> My account</a>
+                    <a href="/track.html" data-auth="customer" hidden><i class='bx bx-package' aria-hidden="true"></i> Track an order</a>
+                    <button class="account-item" type="button" data-signout data-auth="customer" hidden><i class='bx bx-log-out' aria-hidden="true"></i> Sign out</button>
+
+                    <a href="/signin.html" data-auth="guest"><i class='bx bx-log-in' aria-hidden="true"></i> Sign in</a>
+                    <a class="account-cta" href="/signup.html" data-auth="guest"><i class='bx bx-user-plus' aria-hidden="true"></i> Create account</a>
+                </div>
+            </div>
+            <a href="/" class="cart-link" aria-label="Back to the store"><i class='bx bxs-cart'></i></a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+                <i class='bx bx-menu'></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <section class="auth-card">
+            <a class="auth-logo" href="/">
+                <img src="image/logo.png" alt="">
+                <span>Foodies</span>
+            </a>
+
+            <span class="eyebrow">Welcome back</span>
+            <h1>Sign in to your account</h1>
+            <p class="auth-sub">Check out faster, save your delivery details and follow every order.</p>
+
+            <form id="signin-form" autocomplete="on" novalidate>
+                <label class="auth-field">
+                    <span>Email address</span>
+                    <input name="email" type="email" placeholder="you@example.com" required maxlength="120" autocomplete="username">
+                </label>
+
+                <label class="auth-field">
+                    <span>Password</span>
+                    <div class="password-wrap">
+                        <input name="password" type="password" placeholder="Your password" required maxlength="200" autocomplete="current-password">
+                        <button type="button" class="peek" data-toggle-password aria-label="Show password">
+                            <i class='bx bx-show' aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </label>
+
+                <p class="form-error" id="auth-error" role="alert"></p>
+
+                <button class="btn" id="auth-submit" type="submit">Sign in</button>
+            </form>
+
+            <p class="auth-switch">New to Foodies? <a href="/signup.html">Create an account</a></p>
+            <a class="auth-back" href="/"><i class='bx bx-left-arrow-alt' aria-hidden="true"></i> Back to the store</a>
+        </section>
+    </main>
+
+    <script src="nav.js?v=20261121c" defer></script>
+    <script src="auth-nav.js?v=20261121c" defer></script>
+    <script src="auth.js?v=20261121c" defer></script>
+</body>
+</html>
